@@ -1,0 +1,16 @@
+PLAN DE PRUEBAS - SISTEMA HELPDESK (UF2406)
+
+Caso de Prueba 1: Validación de campos vacíos en el formulario web (UF2405)
+- Descripción: Intentar enviar el formulario de creación de una nueva incidencia web dejando el campo 'Título' vacío.
+- Resultado esperado: El sistema de formularios de Django bloquea la petición y muestra los errores de validación en pantalla.
+- Estado: Superado.
+
+Caso de Prueba 2: Transición correcta de estados en POO (UF2404)
+- Descripción: Ejecutar el script `core_modelos.py` intentando cambiar el estado de un ticket directamente de 'Abierto' a 'Cerrado'.
+- Resultado esperado: El método valida la lógica de negocio y lanza la excepción personalizada 'EstadoInvalidoError'.
+- Estado: Superado.
+
+Caso de Prueba 3: Filtros y búsqueda en el Panel de Administración de Django (UF2405)
+- Descripción: Acceder a /admin/, buscar incidencias por título y filtrarlas mediante los selectores laterales por su estado.
+- Resultado esperado: El ORM de Django procesa los filtros correctamente y muestra solo los registros coincidentes.
+- Estado: Superado.

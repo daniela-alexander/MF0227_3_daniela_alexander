@@ -62,15 +62,22 @@ class TicketSoftware(TicketTecnico):
 # Pruebas unitarias básicas
 if __name__ == "__main__":
     try:
+        print("--- PRUEBA 1: Creación y transición válida ---")
         t_hw = TicketHardware(1, "Fallo de Disco Duro", "Alta", "SSD NVMe")
-        print(f"Ticket HW creado: {t_hw._titulo} | SLA: {t_hw.calcular_sla()}h")
+        print(f"Ticket HW creado: {t_hw._titulo} | Estado: {t_hw.estado} | SLA: {t_hw.calcular_sla()}h")
         
-        # Probando transición válida
+        # Transición válida: Abierto -> En Proceso
         t_hw.cambiar_estado("En Proceso")
-        print(f"Nuevo estado HW: {t_hw.estado}")
+        print(f"Nuevo estado (Válido): {t_hw.estado}")
+
+        print("\n--- PRUEBA 2: Transición inválida (Debería lanzar excepción) ---")
+        # Transición inválida: Intentar saltar directo de 'En Proceso' a 'Abierto' (o de 'Cerrado' a otro)
+        # O intentando cerrar directamente desde Abierto como tenías en la opción 1:
+        t_cp = TicketHardware(2, "Error de Red", "Media", "Router")
+        print(f"Ticket 2 creado con estado: {t_cp.estado}")
         
-        # Probando transición inválida (lanzará excepción)
-        t_hw.cambiar_estado("Cerrado") # Debería fallar porque salta directo de En Proceso a Cerrado? No, de En Proceso a Cerrado sí se puede, pero probemos una prohibida:
+        print("Intentando pasar directamente de 'Abierto' a 'Cerrado'...")
+        t_cp.cambiar_estado("Cerrado")
         
     except EstadoInvalidoError as e:
-        print(f"Excepción capturada correctamente: {e}")
+        print(f"¡ÉXITO! Excepción capturada correctamente: {e}")
